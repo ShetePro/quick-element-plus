@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "paths": {
+      "@/components/*": ["packages/components/*"]
+    }
+  },
+  "include": ["packages/**/*.ts", "packages/**/*.d.ts", "packages/**/*.vue", "vite.config.ts"]
+}
