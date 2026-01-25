@@ -1,4 +1,4 @@
 # pnpm-workspace.yaml
 packages:
   - 'packages/*'  # 存放组件源码
-  - 'docs'        # 存放 Vite
+  - 'doc'         # 存放 VitePress 文档
