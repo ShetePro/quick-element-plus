@@ -2,6 +2,19 @@
 
 分页组件，基于 Element Plus Pagination 封装。
 
+## 概述
+
+Pagination 组件提供了分页功能，基于 Element Plus Pagination 封装，完全兼容原生组件的所有功能。
+
+### 主要特性
+
+- **完全兼容**：支持所有 Element Plus Pagination 的属性和事件
+- **默认布局**：提供合理的默认布局配置
+- **类型安全**：完整的 TypeScript 类型支持
+- **易于使用**：简化的 API，使用更便捷
+
+适用于数据列表、表格等需要分页的场景，通常与 Table 组件配合使用。
+
 ## BasicPagination 基础分页
 
 ### 基础用法

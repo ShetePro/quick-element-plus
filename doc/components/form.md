@@ -2,6 +2,24 @@
 
 表单组件提供了基础表单和搜索表单两种组件，支持配置化的表单生成。
 
+## 概述
+
+Form 组件库提供了两种表单组件，支持通过配置快速生成表单，减少重复代码：
+
+- **BasicForm（基础表单）**：通用的表单组件，支持多种表单项类型，通过配置即可生成完整表单
+- **SearchForm（搜索表单）**：基于 BasicForm 封装的搜索表单，内置搜索和重置按钮
+
+### 主要特性
+
+- **配置化生成**：通过配置对象快速生成表单，无需编写大量模板代码
+- **多种表单项类型**：支持文本、数字、选择器、日期、开关、单选、上传等
+- **字典数据支持**：支持静态字典数据和动态接口加载
+- **表单验证**：集成 Element Plus 的表单验证规则
+- **响应式布局**：支持栅格布局，灵活控制表单项排列
+- **插槽支持**：支持自定义表单项内容
+
+适用于数据录入、搜索筛选、表单编辑等场景。
+
 ## BasicForm 基础表单
 
 基于 Element Plus Form 封装的表单组件，支持通过配置快速生成表单。
@@ -189,7 +207,6 @@ const formOption = {
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { SearchForm } from '@quick-element-plus/components'
 
 const searchData = ref({})
@@ -219,6 +236,58 @@ function handleSearch(data) {
 
 function handleReset() {
   console.log('重置')
+}
+</script>
+```
+
+### 配合表格使用
+
+SearchForm 通常与 BasicTable 和 useTable hook 配合使用：
+
+```vue
+<template>
+  <div>
+    <SearchForm
+      v-model="searchData"
+      :option="searchOption"
+      @search="handleSearch"
+      @reset="handleReset"
+    />
+    <BasicTable :register="register" />
+  </div>
+</template>
+
+<script setup>
+import { SearchForm, BasicTable } from '@quick-element-plus/components'
+import { useTable } from '@hook/useTable'
+
+const { register, getList, searchData } = useTable({
+  api: '/api/users',
+  options: {
+    height: 400,
+    columns: [
+      { label: 'ID', prop: 'id' },
+      { label: '用户名', prop: 'username' },
+      { label: '状态', prop: 'status', type: 'select' }
+    ]
+  }
+})
+
+const searchOption = {
+  column: [
+    { label: '用户名', prop: 'username', type: 'text' },
+    { label: '状态', prop: 'status', type: 'select', dictUrl: '/api/status' }
+  ]
+}
+
+function handleSearch() {
+  // 搜索时会自动使用 searchData 中的数据
+  getList()
+}
+
+function handleReset() {
+  // 重置后刷新表格
+  getList()
 }
 </script>
 ```
@@ -271,3 +340,5 @@ function handleReset() {
 - SearchForm 基于 BasicForm，支持所有 BasicForm 的功能
 - 默认使用 ElCard 包裹，可通过 `noCard` 禁用
 - 重置时会清空所有字段，可通过 `ignore` 保留指定字段
+- 通常与 `useTable` hook 配合使用，搜索数据绑定到 `useTable` 返回的 `searchData`
+- 搜索时调用 `getList()` 方法刷新表格数据
