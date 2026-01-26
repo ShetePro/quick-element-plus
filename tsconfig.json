@@ -9,8 +9,17 @@
     "noEmit": true,
     "jsx": "preserve",
     "paths": {
-      "@/components/*": ["packages/components/*"]
+      "@/components/*": ["packages/components/*"],
+      "@/utils/*": ["packages/utils/*"],
+      "@/hook/*": ["packages/hook/*"],
+      "@utils/*": ["packages/utils/*"],
+      "@hook/*": ["packages/hook/*"]
     }
   },
-  "include": ["packages/**/*.ts", "packages/**/*.d.ts", "packages/**/*.vue", "vite.config.ts"]
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.d.ts",
+    "packages/**/*.vue",
+    "vite.config.ts"
+  ]
 }

@@ -1,0 +1,14 @@
+{
+  "name": "quick-element-plus-docs",
+  "version": "1.0.0",
+  "description": "Quick Element Plus 组件库文档",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0"
+  }
+}
