@@ -36,16 +36,39 @@
 import { BasicTableColumn, BasicTableOptions } from '@/components/Table/src/types'
 import Column from '@/components/Table/src/Column.vue'
 import SlotRender from '@/components/Table/src/slotRender'
-import _ from 'lodash'
 
 const props = defineProps<{
   column: BasicTableColumn
   options: BasicTableOptions
   slots: any
 }>()
+
+// 简单的深拷贝函数
+function deepClone<T>(obj: T): T {
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+  if (obj instanceof Date) {
+    return new Date(obj.getTime()) as T
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(item => deepClone(item)) as T
+  }
+  if (typeof obj === 'object') {
+    const cloned = {} as T
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        cloned[key] = deepClone(obj[key])
+      }
+    }
+    return cloned
+  }
+  return obj
+}
+
 // v-bind 如果有 type 属性则会影响表格树数据展示
 function getColumnBindProps(data: Recordable) {
-  const props = _.clone(data)
+  const props = deepClone(data)
   delete props.type
   return props
 }

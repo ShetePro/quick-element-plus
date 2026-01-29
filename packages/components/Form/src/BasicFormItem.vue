@@ -100,7 +100,7 @@ import BasicRadio from '@/components/Radio/BasicRadio.vue'
 import BasicUpload from '@/components/FileUpload/BasicUpload.vue'
 
 const props = defineProps<{
-  modelValue: Recordable
+  modelValue: any
   col: BasicFormColumnProps
   options: BasicFormOption
   disabled: boolean | undefined
