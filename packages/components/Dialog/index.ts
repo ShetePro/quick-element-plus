@@ -1,2 +1,3 @@
-import BasicDialog from "@/components/Dialog/src/BasicDialog.vue";
+import BasicDialog from './src/BasicDialog.vue'
 export { BasicDialog }
+export default BasicDialog
