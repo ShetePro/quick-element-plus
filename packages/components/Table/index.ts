@@ -1,2 +1,3 @@
-import BasicTable from "@/components/Table/src/BasicTable.vue";
-export default BasicTable;
+import BasicTable from './src/BasicTable.vue'
+export { BasicTable }
+export default BasicTable

@@ -31,16 +31,16 @@
 import { computed, onMounted, ref, useAttrs, watch } from 'vue'
 import { DictItem } from '@/types/dict'
 import { useVModel } from '@vueuse/core'
-import { useDict } from '@/hook/useDict'
 import { isArray, isUnDef } from '@/utils/is'
+import { requestDictByUrl } from '@/utils/dict'
 
 const props = defineProps<{
   modelValue: number | string | undefined
-  dictData?: Recordable
+  dictData?: Record<string, any>[]
   dictUrl?: string
-  dictQuery?: { data?: Recordable; params?: Recordable }
-  dictMethod?: string
-  dictResponseHandle?: (res: Recordable) => Recordable[]
+  dictQuery?: { data?: Record<string, any>; params?: Record<string, any> }
+  dictMethod?: 'get' | 'post'
+  dictResponseHandle?: (res: Record<string, any>) => Record<string, any>[]
   detail?: boolean
   propsOption?: { value: string; label: string }
 }>()
@@ -48,61 +48,69 @@ const emits = defineEmits(['optionClick', 'update:modelValue'])
 
 const attrs = useAttrs()
 const data = useVModel(props, 'modelValue', emits)
-const { getDictByProp, requestDict } = useDict()
-const optionList = ref<Recordable>([])
-const getOptionList = computed((): Recordable => {
+const optionList = ref<Record<string, any>[]>([])
+
+const getOptionList = computed((): Record<string, any>[] => {
   return props.dictData || optionList.value
 })
+
 const getPropsOption = computed(() => {
   return Object.assign({ label: 'label', value: 'value' }, props.propsOption)
 })
+
 const getDetailText = computed(() => {
   const { dictData } = props
   const { value, label } = getPropsOption.value
-  let textList = []
-  if (isArray(data.value)) {
-    data.value.forEach((dataValue) => {
-      const dictItem = dictData?.find((item: Recordable) => item[value] === dataValue)
-      textList.push(dictItem ? dictItem[label] : data.value)
+  let textList: string[] = []
+  const currentValue = data.value
+  
+  if (isArray(currentValue)) {
+    (currentValue as any[]).forEach((dataValue) => {
+      const dictItem = dictData?.find((item) => item[value] === dataValue)
+      textList.push(dictItem ? dictItem[label] : String(dataValue))
     })
   } else {
-    textList.push(
-      dictData
-        ? dictData.find((item: Recordable) => item[value] === data.value)?.[label]
-        : data.value
-    )
+    const dictItem = dictData?.find((item) => item[value] === currentValue)
+    textList.push(dictItem ? dictItem[label] : String(currentValue))
   }
   return textList
 })
+
+// 请求字典数据
+async function fetchDictData() {
+  if (!props.dictUrl) return
+  
+  try {
+    const { data: resData } = await requestDictByUrl({
+      url: props.dictUrl,
+      method: props.dictMethod || 'get',
+      data: props.dictQuery?.data || {},
+      params: props.dictQuery?.params || {}
+    })
+    
+    optionList.value = props.dictResponseHandle ? props.dictResponseHandle(resData) : resData
+  } catch (error) {
+    console.error('Failed to fetch dict data:', error)
+  }
+}
+
 watch(
   () => props.dictQuery,
   () => {
-    props.dictUrl && requestDict({
-      prop: 'option',
-      dictUrl: props.dictUrl,
-      dictMethod: props.dictMethod,
-      dictQuery: props.dictQuery,
-      dictResponseHandle: props.dictResponseHandle
-    }).then(() => {
-      optionList.value = getDictByProp('option')
-    })
+    if (props.dictUrl) {
+      fetchDictData()
+    }
   }
 )
+
 onMounted(() => {
   if (!props.dictData && props.dictUrl) {
-    requestDict({
-      prop: 'option',
-      dictUrl: props.dictUrl,
-      dictMethod: props.dictMethod,
-      dictQuery: props.dictQuery,
-      dictResponseHandle: props.dictResponseHandle
-    }).then(() => {
-      optionList.value = getDictByProp('option')
-    })
+    fetchDictData()
   }
 })
-function optionClick(item: DictItem) {
-  emits('optionClick', item)
+
+function optionClick(item: Record<string, any>) {
+  emits('optionClick', item as DictItem)
 }
 </script>
 

@@ -1,27 +1,65 @@
 {
   "name": "quick-element-plus",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "基于 Element Plus 的快速业务组件库",
+  "type": "module",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./dist/*": "./dist/*"
   },
-  "keywords": [],
+  "files": [
+    "dist",
+    "packages"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && pnpm run build:types",
+    "build:types": "vue-tsc --declaration --emitDeclarationOnly --outDir dist",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.ts,.tsx --fix",
+    "docs:dev": "cd doc && pnpm dev",
+    "docs:build": "cd doc && pnpm build",
+    "docs:preview": "cd doc && pnpm preview"
+  },
+  "keywords": [
+    "vue3",
+    "element-plus",
+    "components",
+    "ui",
+    "quick-element-plus"
+  ],
   "author": "",
   "license": "ISC",
+  "peerDependencies": {
+    "element-plus": "^2.0.0",
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.1.0",
+    "axios": "^1.13.3",
+    "vue": "^3.5.27"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@types/node": "^25.0.10",
     "@vitejs/plugin-vue": "^6.0.3",
+    "element-plus": "^2.13.1",
     "eslint": "^9.39.2",
     "eslint-plugin-vue": "^10.7.0",
     "prettier": "^3.8.1",
+    "typescript": "^5.0.0",
     "typescript-eslint": "^8.53.1",
     "vite": "^7.3.1",
-    "vue-eslint-parser": "^10.2.0"
-  },
-  "dependencies": {
-    "axios": "^1.13.3",
-    "vue": "^3.5.27"
+    "vite-plugin-dts": "^4.0.0",
+    "vue-eslint-parser": "^10.2.0",
+    "vue-router": "^4.0.0",
+    "vue-tsc": "^2.0.0"
   }
 }

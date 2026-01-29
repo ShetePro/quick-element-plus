@@ -20,8 +20,8 @@ type ExportButtonProps = {
   label?: string
   icon?: string
   exportName?: string
-  requestData?: Recordable
-  requestQuery?: Recordable
+  requestData?: Record<string, any>
+  requestQuery?: Record<string, any>
 }
 const props = defineProps<ExportButtonProps>()
 const emits = defineEmits(['confirm'])
@@ -32,7 +32,7 @@ const route = useRoute()
 
 // 导出
 function exportApi() {
-  return request.post({
+  return request.post<Blob>({
     url: props.api,
     responseType: 'blob',
     data: props.requestData,
@@ -46,7 +46,8 @@ function exportApi() {
 function exportTable() {
   exportLoading.value = true;
   exportApi()
-    .then((data) => {
+    .then((res) => {
+      const data = res.data;
       // 如果二进制类型不是excel格式 说明后台接口报错了 停止导出
       if (data.type === "application/json") {
         message("导出失败", {type: "warning"})

@@ -21,11 +21,14 @@ type ImportButtonProps = {
   api: string
   label?: string
   icon?: string
-  requestData?: Recordable
-  requestQuery?: Recordable
-  isDownload?: Boolean
+  requestData?: Record<string, any>
+  requestQuery?: Record<string, any>
+  isDownload?: boolean
+  accept?: string
 }
-const props = defineProps<ImportButtonProps>()
+const props = withDefaults(defineProps<ImportButtonProps>(), {
+  accept: '.xls,.xlsx'
+})
 const emits = defineEmits(['confirm'])
 const attrs = useAttrs()
 const importLoading = ref(false)
@@ -36,44 +39,46 @@ function importApi(data: FormData) {
   return request.post({
     url: props.api,
     data,
-  },
-  )
+  })
 }
+
 // 导入并下载
 function importApi2(data: FormData) {
-  return request.post({
+  return request.post<Blob>({
     url: props.api,
     data,
     responseType: 'blob',
-  },
-  {
+  }, {
     isTransformRequestResult: false
   })
 }
+
 function importTable() {
-  openFileSelect({accept: '.xls, .xlsx'}).then((data) => {
+  openFileSelect(props.accept).then((file) => {
+    if (!file) return
+    
     if (props.api) {
       const formData = new FormData()
-      data && formData.append('file', data[0])
+      formData.append('file', file)
       importLoading.value = true
-      if(!props.isDownload){
+      
+      if (!props.isDownload) {
         importApi(formData)
           .then(() => {
             message('导入成功', { type: 'success' })
             emits('confirm')
           })
-
           .finally(() => {
             importLoading.value = false
           })
-      }else{
+      } else {
         importApi2(formData)
-          .then((data) => {
-            downloadByBlob(data, '出差表.xlsx')
+          .then((res) => {
+            downloadByBlob(res.data, '导入结果.xlsx')
             message('导入成功', { type: 'success' })
             emits('confirm')
           })
-          .catch((err)=>{
+          .catch((err) => {
             console.log(err);
           })
           .finally(() => {

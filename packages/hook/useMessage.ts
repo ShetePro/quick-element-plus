@@ -4,11 +4,12 @@ import { ElMessage, ElMessageBox, MessageHandler } from "element-plus";
 
 type messageStyle = "el" | "antd";
 type messageTypes = "info" | "success" | "warning" | "error";
+
 interface MessageParams {
   /** 消息类型，可选 `info` 、`success` 、`warning` 、`error` ，默认 `info` */
   type?: messageTypes;
   /** 自定义图标，该属性会覆盖 `type` 的图标 */
-  icon?: string;
+  icon?: any;
   /** 是否将 `message` 属性作为 `HTML` 片段处理，默认 `false` */
   dangerouslyUseHTMLString?: boolean;
   /** 消息风格，可选 `el` 、`antd` ，默认 `antd` */
@@ -30,10 +31,10 @@ interface MessageParams {
 }
 
 export function useMessage () {
-  const message = (message: string | VNode | (() => VNode), params?: MessageParams): MessageHandler => {
+  const message = (msg: string | VNode | (() => VNode), params?: MessageParams): MessageHandler => {
     if (!params) {
       return ElMessage({
-        message,
+        message: msg,
         customClass: "pure-message"
       });
     }
@@ -52,8 +53,8 @@ export function useMessage () {
       onClose
     } = params
 
-    return ElMessage({
-      message,
+    const options: any = {
+      message: msg,
       type,
       icon,
       dangerouslyUseHTMLString,
@@ -66,7 +67,9 @@ export function useMessage () {
       // 全局搜 pure-message 即可知道该类的样式位置
       customClass: customClass === "antd" ? "antd-message" : "",
       onClose: () => (isFunction(onClose) ? onClose() : null)
-    });
+    };
+
+    return ElMessage(options);
   }
   /**
    * 关闭所有 `Message` 消息提示函数
