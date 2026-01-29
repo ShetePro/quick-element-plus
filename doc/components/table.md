@@ -1,3 +1,7 @@
+---
+outline: [2, 4]
+---
+
 # Table 表格
 
 表格组件，基于 Element Plus Table 封装，支持配置化列定义和数据字典。

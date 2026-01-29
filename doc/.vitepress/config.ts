@@ -12,6 +12,12 @@ export default defineConfig({
       { text: '组件', link: '/components/' }
     ],
     
+    // 右侧目录配置
+    outline: {
+      level: [2, 4], // 显示 h2 到 h4 标题
+      label: '本页目录'
+    },
+    
     sidebar: {
       '/components/': [
         {
@@ -30,7 +36,7 @@ export default defineConfig({
     },
     
     socialLinks: [
-      { icon: 'github', link: 'https://github.com' }
+      { icon: 'github', link: 'https://github.com/ShetePro/quick-element-plus' }
     ],
     
     footer: {
