@@ -1,6 +1,6 @@
 {
   "name": "quick-element-plus",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "基于 Element Plus 的快速业务组件库",
   "type": "module",
   "main": "./dist/index.umd.js",
