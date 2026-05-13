@@ -2,3 +2,4 @@
 packages:
   - 'packages/*'  # 存放组件源码
   - 'doc'         # 存放 VitePress 文档
+  - 'example'     # 存放演示站点
