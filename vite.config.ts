@@ -7,10 +7,11 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      include: ["packages/**/*.ts", "packages/**/*.vue"],
-      exclude: ["node_modules"],
+      include: ["index.ts", "packages/**/*.ts", "packages/**/*.vue", "types/**/*.ts"],
+      exclude: ["node_modules", "example", "doc"],
       insertTypesEntry: true,
       copyDtsFiles: true,
+      outDir: "dist",
     }),
   ],
   resolve: {
