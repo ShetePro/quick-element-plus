@@ -1,5 +1,5 @@
 <template>
-  <div class="basic-select">
+  <div class="basic-radio w-full">
     <el-radio-group v-model="data" v-bind="attrs" :clearable="isUnDef(attrs.clearable) ? true : attrs.clearable">
       <el-radio
         v-for="item in getOptionList"
@@ -47,4 +47,8 @@ function optionClick(item) {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.basic-radio {
+  width: 100%;
+}
+</style>

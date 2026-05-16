@@ -1,5 +1,5 @@
 <template>
-  <div class="basic-select">
+  <div class="basic-select w-full">
     <el-select
       v-model="data"
       v-bind="attrs"
@@ -114,4 +114,8 @@ function optionClick(item: Record<string, any>) {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.basic-select {
+  width: 100%;
+}
+</style>
