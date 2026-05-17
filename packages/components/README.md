@@ -133,6 +133,50 @@ const dialogOptions = {
 </script>
 ```
 
+### BasicSelect
+
+```vue
+<template>
+  <el-form label-width="80px">
+    <el-form-item label="状态">
+      <BasicSelect v-model="statusValue" :dict-data="statusOptions" />
+    </el-form-item>
+  </el-form>
+</template>
+
+<script setup lang="ts">
+import { BasicSelect } from '@quick-element-plus/components'
+import { ref } from 'vue'
+
+const statusValue = ref(undefined)
+const statusOptions = [
+  { label: '启用', value: 1 },
+  { label: '禁用', value: 0 }
+]
+</script>
+```
+
+**注意**: BasicSelect、BasicRadio、ColorSelect 组件默认 `width: 100%`，需在父容器（如 `el-form-item`）中设置宽度约束。
+
+### BasicRadio
+
+```vue
+<template>
+  <BasicRadio v-model="radioValue" :dict-data="radioOptions" />
+</template>
+
+<script setup lang="ts">
+import { BasicRadio } from '@quick-element-plus/components'
+import { ref } from 'vue'
+
+const radioValue = ref('1')
+const radioOptions = [
+  { label: '选项一', value: '1' },
+  { label: '选项二', value: '2' }
+]
+</script>
+```
+
 ## 类型导出
 
 ```typescript

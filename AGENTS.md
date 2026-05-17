@@ -13,6 +13,7 @@ quick-element-plus/
 │   ├── utils/               # http (axios 封装), dict, file, is, permission, transform
 │   └── enum/                # httpEnum, settingsEnum
 ├── doc/                     # VitePress 文档站点（独立子包）
+├── example/                 # 演示站点（Vue 3 + Vite + Vue Router）
 ├── types/                   # global.d.ts (Recordable, MainDialogStatus 等全局类型)
 └── dist/                    # 构建产物：index.umd.js, index.es.js, *.d.ts
 ```
@@ -27,7 +28,13 @@ pnpm build        # vite build + vue-tsc 类型生成 → dist/
 pnpm lint         # ESLint 检查 .vue/.ts/.tsx
 pnpm docs:dev     # 启动 VitePress 文档（cd doc && pnpm dev）
 pnpm docs:build   # 构建文档
+pnpm --filter example dev  # 启动演示站点（cd example && pnpm dev）
 ```
+
+**pnpm workspace 子包**：
+- `packages/*` - 组件源码
+- `doc` - VitePress 文档站点
+- `example` - 演示站点
 
 **无测试命令** - 项目未配置 vitest/jest。
 

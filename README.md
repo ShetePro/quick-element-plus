@@ -151,6 +151,7 @@ quick-element-plus/
 │   ├── utils/          # 工具函数
 │   └── enum/           # 枚举定义
 ├── doc/                # 文档站点 (VitePress)
+├── example/            # 演示站点 (Vue 3 + Vite)
 ├── types/              # 类型定义
 ├── dist/               # 构建产物
 ├── index.ts            # 入口文件
@@ -169,6 +170,11 @@ pnpm install
 
 # 启动文档开发服务器
 pnpm docs:dev
+
+# 启动演示站点
+pnpm --filter example dev
+# 或
+cd example && pnpm dev
 
 # 构建组件库
 pnpm build
