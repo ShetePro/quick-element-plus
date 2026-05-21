@@ -5,11 +5,11 @@ import { request } from '@/utils/http'
 import type { AxiosRequestConfig } from 'axios'
 import type { RequestOptions } from '@/utils/http/types'
 import { isFunction } from '@/utils/is'
-type TableSearch = {
+export type TableSearch = {
   data: Recordable
   params: Recordable
 }
-type UseTableConfig = {
+export type UseTableConfig = {
   api?: string | Ref<string>
   apiMethod?: 'POST' | 'GET' | string
   apiConfig?: AxiosRequestConfig | (() => AxiosRequestConfig)
@@ -28,7 +28,7 @@ export type UseTableRegisterProps<T> = {
   }
   loading: Ref<boolean>
 }
-interface UseTableReturn<T> {
+export interface UseTableReturn<T> {
   register: () => UseTableRegisterProps<T>
   getData: () => T[]
   setData: (data: T[]) => void
