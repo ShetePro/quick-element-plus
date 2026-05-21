@@ -1,0 +1,1 @@
+export type { UseTableRegisterProps, UseTableConfig, UseTableReturn, TableSearch } from './useTable'

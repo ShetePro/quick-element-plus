@@ -32,8 +32,3 @@ export { default as ColorSelect } from './Select/ColorSelect.vue'
 export { default as BasicTable } from './Table/index'
 export { default as TableColumn } from './Table/src/TableColumn.vue'
 export { default as Column } from './Table/src/Column.vue'
-
-// 类型导出
-export type * from './Form/src/types'
-export type * from './Dialog/src/types'
-export type * from './Table/src/types'

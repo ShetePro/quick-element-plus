@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      include: ["index.ts", "packages/**/*.ts", "packages/**/*.vue", "types/**/*.ts"],
+      include: ["index.ts", "types.ts", "packages/**/*.ts", "packages/**/*.vue", "types/**/*.ts"],
       exclude: ["node_modules", "example", "doc"],
       insertTypesEntry: true,
       copyDtsFiles: true,
@@ -26,9 +26,15 @@ export default defineConfig({
   build: {
     // 库模式配置
     lib: {
-      entry: resolve(__dirname, "index.ts"), // 打包入口文件
+      entry: {
+        index: resolve(__dirname, "index.ts"),
+        types: resolve(__dirname, "types.ts"),
+      },
       name: "QuickElementPlus",
-      fileName: (format) => `index.${format}.js`, // 输出文件名
+      fileName: (format, entryName) => {
+        if (entryName === 'types') return `types.${format === 'es' ? 'es' : 'cjs'}.js`
+        return `index.${format === 'es' ? 'es' : 'umd'}.js`
+      },
     },
     rollupOptions: {
       // 确保外部化那些你不想打包进库的依赖（重要！）
