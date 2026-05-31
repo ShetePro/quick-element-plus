@@ -15,18 +15,28 @@
 ### 安装
 
 ```bash
-pnpm install
+pnpm add quick-element-plus
 ```
 
 ### 使用
 
 ```vue
 <script setup>
-import { BasicButton } from '@quick-element-plus/components'
+import { BasicTable, useTable } from 'quick-element-plus'
+
+const { register, getList } = useTable({
+  api: '/api/users',
+  options: {
+    columns: [
+      { label: '用户名', prop: 'username' },
+      { label: '邮箱', prop: 'email' }
+    ]
+  }
+})
 </script>
 
 <template>
-  <BasicButton>按钮</BasicButton>
+  <BasicTable :register="register" />
 </template>
 ```
 
@@ -44,8 +54,12 @@ import { BasicButton } from '@quick-element-plus/components'
 
 ```
 packages/
-  └── components/     # 组件源码
-doc/                  # 文档
+  ├── components/    # 组件源码
+  ├── hook/          # 组合式函数
+  ├── utils/          # 工具函数
+  └── enum/          # 枚举定义
+example/              # 演示站点
+doc/                  # 文档站点
 ```
 
 ## 开发

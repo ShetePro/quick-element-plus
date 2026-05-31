@@ -1,7 +1,9 @@
 <template>
   <div class="demo-container">
     <h2>Form 表单演示</h2>
-    <p class="desc">BasicForm 基础表单 + SearchForm 搜索表单，支持配置化表单项</p>
+    <p class="desc">
+      BasicForm 基础表单 + SearchForm 搜索表单，支持配置化表单项
+    </p>
     <el-divider />
 
     <el-row :gutter="20">
@@ -10,7 +12,10 @@
           <template #header>
             <span>BasicForm 基础表单</span>
           </template>
-          <BasicForm v-model="formData" :option="formOption" />
+          <BasicForm
+            v-model="formData"
+            :option="formOption"
+          />
         </el-card>
       </el-col>
       <el-col :span="12">
@@ -18,7 +23,12 @@
           <template #header>
             <span>SearchForm 搜索表单</span>
           </template>
-          <SearchForm v-model="searchData" :option="searchOption" @search="handleSearch" @reset="handleReset" />
+          <SearchForm
+            v-model="searchData"
+            :option="searchOption"
+            @search="handleSearch"
+            @reset="handleReset"
+          />
         </el-card>
       </el-col>
     </el-row>
@@ -28,6 +38,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { BasicForm, SearchForm } from 'quick-element-plus'
+import type { BasicFormOption } from 'quick-element-plus/types'
 
 const formData = ref({
   username: '',
@@ -35,12 +46,12 @@ const formData = ref({
   status: undefined
 })
 
-const formOption = {
+const formOption: BasicFormOption = {
   labelWidth: '100px',
   column: [
-    { label: '用户名', prop: 'username', type: 'input', span: 24, rules: [{ required: true, message: '请输入用户名' }] },
-    { label: '邮箱', prop: 'email', type: 'input', span: 24 },
-    { label: '状态', prop: 'status', type: 'select', span: 24, dictData: [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }] }
+    { label: '用户名', prop: 'username', type: 'text', span: 24, rules: [{ required: true, message: '请输入用户名' }] },
+    { label: '邮箱', prop: 'email', type: 'text', span: 24 },
+    { label: '状态', prop: 'status', type: 'text', span: 24, dictData: [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }] }
   ]
 }
 
@@ -49,10 +60,10 @@ const searchData = ref({
   status: undefined
 })
 
-const searchOption = {
+const searchOption: BasicFormOption = {
   labelWidth: '80px',
   column: [
-    { label: '关键词', prop: 'keyword', type: 'input', span: 8 },
+    { label: '关键词', prop: 'keyword', type: 'text', span: 8 },
     { label: '状态', prop: 'status', type: 'select', span: 8, dictData: [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }] }
   ]
 }
