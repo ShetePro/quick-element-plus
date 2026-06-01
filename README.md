@@ -12,9 +12,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ShetePro/quick-element-plus">📚 文档</a> | 
+  <a href="https://shetepro.com/quick-element-plus/">📚 文档</a> | 
   <a href="https://github.com/ShetePro/quick-element-plus">🔧 组件</a> | 
-  <a href="https://github.com/ShetePro/quick-element-plus">📦 下载</a>
+  <a href="https://www.npmjs.com/package/quick-element-plus">📦 下载</a>
 </p>
 
 ---
@@ -110,7 +110,7 @@ function handleSearch() {
 | SearchForm | 搜索表单组件 | [查看](./doc/components/form.md) |
 | BasicSelect | 选择器组件，支持字典数据 | [查看](./doc/components/select.md) |
 | BasicRadio | 单选组件 | [查看](./doc/components/radio.md) |
-| BasicUpload | 文件上传组件 | - |
+| BasicUpload | 文件上传组件 | [查看](https://shetepro.com/quick-element-plus/components/upload) |
 
 ### 按钮组件
 
@@ -185,7 +185,7 @@ pnpm docs:build
 
 ## 📖 文档
 
-在线文档：[https://github.com/ShetePro/quick-element-plus](https://github.com/ShetePro/quick-element-plus)
+在线文档：[https://shetepro.com/quick-element-plus/](https://shetepro.com/quick-element-plus/)
 
 本地启动文档：
 

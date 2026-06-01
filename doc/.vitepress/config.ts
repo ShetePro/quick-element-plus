@@ -4,20 +4,20 @@ export default defineConfig({
   title: 'Quick Element Plus',
   description: '基于 Element Plus 的快速组件库文档',
   lang: 'zh-CN',
-  base: '/',
-  
+  base: '/quick-element-plus/',
+
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
       { text: '组件', link: '/components/' }
     ],
-    
+
     // 右侧目录配置
     outline: {
       level: [2, 4], // 显示 h2 到 h4 标题
       label: '本页目录'
     },
-    
+
     sidebar: {
       '/components/': [
         {
@@ -35,11 +35,11 @@ export default defineConfig({
         }
       ]
     },
-    
+
     socialLinks: [
       { icon: 'github', link: 'https://github.com/ShetePro/quick-element-plus' }
     ],
-    
+
     footer: {
       message: 'Released under the ISC License.',
       copyright: 'Copyright © 2024'
