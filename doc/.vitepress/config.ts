@@ -29,7 +29,8 @@ export default defineConfig({
             { text: 'Table 表格', link: '/components/table' },
             { text: 'Pagination 分页', link: '/components/pagination' },
             { text: 'Radio 单选', link: '/components/radio' },
-            { text: 'Select 选择器', link: '/components/select' }
+            { text: 'Select 选择器', link: '/components/select' },
+            { text: 'Upload 上传', link: '/components/upload' }
           ]
         }
       ]

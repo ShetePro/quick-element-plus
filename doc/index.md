@@ -49,6 +49,7 @@ const { register, getList } = useTable({
 - [**Pagination 分页**](/components/pagination) - 分页组件
 - [**Radio 单选**](/components/radio) - 单选组件
 - [**Select 选择器**](/components/select) - 选择器组件（基础选择器、颜色选择器）
+- [**Upload 上传**](/components/upload) - 文件上传组件
 
 ## 项目结构
 
